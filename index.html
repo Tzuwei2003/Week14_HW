@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <title>Week14_HW</title>
+   <style type="text/css">
+      table{border: 5px solid saddlebrown;}
+      .tableName{font-size: large; font-family: arial; font-weight: bolder; color: purple;}
+      .tableHead{font-family: arial; font-weight: bold; color: darkgreen; background-color: lightcyan;}
+      .tableStyle{font-family: arial; background-color: lavender; color: crimson;}
+   </style>
+   
+</head>
+<body>
+   <p><img id="die1" src="die1.png" alt="blank image">
+      <img id="die2" src="die1.png" alt="blank image">
+      <img id="die3" src="die1.png" alt="blank image">
+      <img id="die4" src="die1.png" alt="blank image">
+      <img id="die5" src="die1.png" alt="blank image">
+      <img id="die6" src="die1.png" alt="blank image"></p>
+   <p><img id="die7" src="die1.png" alt="blank image">
+      <img id="die8" src="die1.png" alt="blank image">
+      <img id="die9" src="die1.png" alt="blank image">
+      <img id="die10" src="die1.png" alt="blank image">
+      <img id="die11" src="die1.png" alt="blank image">
+      <img id="die12" src="die1.png" alt="blank image"></p>
+   <form action = "#">
+      <input id="button" type="button" value="Roll Dice">
+   </form>
+   <center><div id="tableAboutFrequency"></div></center>
+   <script>
+      window.addEventListener("load", start);
+      var totalDice=0;
+      var frequency1=0;
+      var frequency2=0;
+      var frequency3=0;
+      var frequency4=0;
+      var frequency5=0;
+      var frequency6=0;
+      var frequency7=0;
+      var frequency8=0;
+      var frequency9=0;
+      var frequency10=0;
+      var frequency11=0;
+      var frequency12=0;
+
+      function start(){
+         var button=document.getElementById('button');
+         button.addEventListener("click", rollDice);
+      }
+
+      function rollDice(){
+         var randNum;
+         for(var i=1; i<=12; ++i){
+            randNum=Math.floor(1 + Math.random() * 6);
+            setImage(i, randNum);
+            tallyRolls(randNum);
+            ++totalDice;
+         }
+         updateTableAboutFrequency();
+      }
+
+      function setImage(i, randNum){
+         var dieImage=document.getElementById("die"+i)
+         dieImage.setAttribute("src", "die"+randNum+".png");
+         dieImage.setAttribute("alt", "die image with"+randNum+"sopt(s)");
+      }
+
+      function tallyRolls(randNum){
+         switch(randNum){
+            case 1:
+               ++frequency1;
+               break;
+            case 2:
+               ++frequency2;
+               break;
+            case 3:
+               ++frequency3;
+               break;
+            case 4:
+               ++frequency4;
+               break;
+            case 5:
+               ++frequency5;
+               break;
+            case 6:
+               ++frequency6;
+               break;
+         }
+      }
+
+      function updateTableAboutFrequency(){
+         var table=document.getElementById('tableAboutFrequency');
+
+         table.innerHTML="<table border=1>"+
+                         "<caption class=tableName>Die Rolling Frequencies</caption>"+"<thead class=tableHead><th>Face</th><th>Frequency</th>"+"<th>Percent</th></thead>"+
+                         "<tbody class=tableStyle><tr> <td>1</td> <td>"+frequency1+"</td> <td>"+Math.floor((frequency1/totalDice)*100)+"%"+"</td> </tr>"+
+                                "<tr> <td>2</td> <td>"+frequency2+"</td> <td>"+Math.floor((frequency2/totalDice)*100)+"%"+"</td> </tr>"+
+                                "<tr> <td>3</td> <td>"+frequency3+"</td> <td>"+Math.floor((frequency3/totalDice)*100)+"%"+"</td> </tr>"+
+                                "<tr> <td>4</td> <td>"+frequency4+"</td> <td>"+Math.floor((frequency4/totalDice)*100)+"%"+"</td> </tr>"+
+                                "<tr> <td>5</td> <td>"+frequency5+"</td> <td>"+Math.floor((frequency5/totalDice)*100)+"%"+"</td> </tr>"+
+                                "<tr> <td>6</td> <td>"+frequency6+"</td> <td>"+Math.floor((frequency6/totalDice)*100)+"%"+"</td> </tr>"+
+                                "</tbody></table>";
+      }
+
+
+   </script>
+</body>
+</html>
